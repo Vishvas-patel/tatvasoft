@@ -1,0 +1,62 @@
+CREATE TABLE cus (
+   cus_id serial PRIMARY KEY,
+   f_name character varying(100) NOT NULL,
+   l_name character varying(100) NOT NULL,
+   e_mail character varying(255) UNIQUE NOT NULL,
+   updated_date timestamp with time zone
+);
+
+SELECT * from cus
+insert into cus(cus_id,f_name,l_name,email,updated_date) values (10,"krish","patel","kkpatel@gmail.com",now());
+insert into cus(cus_id,f_name,l_name,email,updated_date) values (11,"het","patel","hhpatel@gmail.com",now());
+insert into cus(cus_id,f_name,l_name,email,updated_date) values (12,"vijay","patel","vvpatel@gmail.com",now());
+ALTER TABLE cus ADD COLUMN active boolean;
+ALTER TABLE cus DROP COLUMN active;
+ALTER TABLE cus RENAME COLUMN e_mail TO email_address;
+ALTER TABLE cus RENAME COLUMN email_address TO email;
+ALTER TABLE cus RENAME TO users;
+ALTER TABLE users RENAME TO cus;
+select cus_id,f_name from cus;
+select cus_id from cus where cus_id=10;
+
+CREATE TABLE ord (
+    
+    cust_id INTEGER NOT NULL REFERENCES cus(cus_id),
+    ord_number CHARACTER VARYING(50) NOT NULL,
+    ord_amount DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO ord (cust_id, ord_number, ord_amount) VALUES
+  (1,  'ORD001', 50.00),
+  (2,  'ORD002', 35.75),
+  (3,  'ORD003', 100.00),
+  (4,  'ORD004', 30.25),
+  (5,  'ORD005', 90.75)
+
+
+SELECT
+	f_name,
+	l_name
+FROM
+	cus
+ORDER BY
+	f_name ASC;
+
+SELECT
+       f_name,
+       l_name
+FROM
+       cus
+ORDER BY
+       l_name DESC;
+
+
+SELECT
+	cus_id,
+	f_name,
+	l_name
+FROM
+	cus
+ORDER BY
+	f_name ASC,
+	l_name DESC;
